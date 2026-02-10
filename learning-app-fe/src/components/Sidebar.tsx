@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import {
   Video,
   Play,
@@ -29,22 +29,33 @@ export default function Sidebar({
   onStreakUpdate,
 }: SidebarProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [currentDayIndex, setCurrentDayIndex] = React.useState(0);
   const [mounted, setMounted] = React.useState(false);
   const [displayStreak, setDisplayStreak] = React.useState(0);
-  // Đổi thứ tự: T2 -> CN (Monday first, Sunday last)
   const days = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
+
+  // Helper function to check if route is active
+  const isActive = (path: string) => {
+    if (path === "/video") {
+      return pathname === "/video" || pathname === "/";
+    }
+    return pathname === path;
+  };
 
   React.useEffect(() => {
     setMounted(true);
 
     const today = new Date();
-    const dayOfWeek = today.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-
-    // Convert to Monday-first index (0 = Monday, 6 = Sunday)
-    // If Sunday (0) -> 6, else subtract 1
+    const dayOfWeek = today.getDay();
     const mondayFirstIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
     setCurrentDayIndex(mondayFirstIndex);
+
+    console.log("=== DEBUG STREAK ===");
+    console.log("Raw dayOfWeek:", dayOfWeek);
+    console.log("Calculated index:", mondayFirstIndex);
+    console.log("Should show:", days[mondayFirstIndex]);
+    console.log("Days array:", days);
 
     const loadStreak = () => {
       if (typeof window === "undefined") return;
@@ -69,18 +80,15 @@ export default function Sidebar({
       let newStreak = parseInt(storedStreak || "0");
 
       if (diffDays === 0) {
-        // Same day - keep current streak
         setDisplayStreak(newStreak);
         return;
       } else if (diffDays === 1) {
-        // Next day - increment streak
         newStreak += 1;
         localStorage.setItem("lastStudyDate", todayStr);
         localStorage.setItem("currentStreak", newStreak.toString());
         setDisplayStreak(newStreak);
         if (onStreakUpdate) onStreakUpdate(newStreak);
       } else {
-        // Missed days - reset streak
         newStreak = 1;
         localStorage.setItem("lastStudyDate", todayStr);
         localStorage.setItem("currentStreak", "1");
@@ -260,13 +268,11 @@ export default function Sidebar({
           </div>
         </div>
       ) : (
-        // Mini Streak Section - Only show current day with fire
         <div
           className={`py-4 ${
             isDarkMode ? "border-gray-700" : "border-cyan-100"
           } border-b flex flex-col items-center gap-2`}
         >
-          {/* Fire icon in circle */}
           <div
             className={`w-12 h-12 rounded-full flex items-center justify-center ${
               isDarkMode
@@ -276,8 +282,6 @@ export default function Sidebar({
           >
             <span className="text-2xl">🔥</span>
           </div>
-
-          {/* Current day label below fire */}
           <span
             className={`text-sm font-bold ${
               isDarkMode ? "text-gray-200" : "text-gray-700"
@@ -295,47 +299,65 @@ export default function Sidebar({
             <>
               <button
                 onClick={() => router.push("/video")}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 rounded-xl font-medium hover:from-cyan-100 hover:to-blue-100 transition shadow-sm hover:shadow-md transform hover:scale-105"
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition shadow-sm hover:shadow-md transform hover:scale-105 ${
+                  isActive("/video")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
+                    ? "text-gray-300 hover:bg-gray-700"
+                    : "text-gray-600 hover:bg-cyan-50"
+                }`}
               >
                 <Video className="w-5 h-5" />
                 <span>Danh sách video</span>
               </button>
               <button
                 onClick={() => router.push("/video/myVideo")}
-                className={`w-full flex items-center gap-3 px-4 py-3 ${
-                  isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
+                  isActive("/video/myVideo")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-cyan-50"
-                } rounded-xl transition transform hover:scale-105`}
+                }`}
               >
                 <Play className="w-5 h-5" />
                 <span>Video của tôi</span>
               </button>
               <button
                 onClick={() => router.push("/recentlyViewed")}
-                className={`w-full flex items-center gap-3 px-4 py-3 ${
-                  isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
+                  isActive("/recentlyViewed")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-cyan-50"
-                } rounded-xl transition transform hover:scale-105`}
+                }`}
               >
                 <Clock className="w-5 h-5" />
                 <span>Xem gần đây</span>
               </button>
               <button
                 onClick={() => router.push("/vocabulary")}
-                className={`w-full flex items-center gap-3 px-4 py-3 ${
-                  isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
+                  isActive("/vocabulary")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-cyan-50"
-                } rounded-xl transition transform hover:scale-105`}
+                }`}
               >
                 <BookMarked className="w-5 h-5" />
                 <span>Từ vựng của tôi</span>
               </button>
               <button
                 onClick={() => router.push("/practice")}
-                className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 rounded-xl font-medium hover:from-cyan-100 hover:to-blue-100 transition shadow-sm hover:shadow-md transform hover:scale-105"
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition shadow-sm hover:shadow-md transform hover:scale-105 ${
+                  isActive("/practice")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
+                    ? "text-gray-300 hover:bg-gray-700"
+                    : "text-gray-600 hover:bg-cyan-50"
+                }`}
               >
                 <BookOpen className="w-5 h-5" />
                 <span>Luyện đề</span>
@@ -346,9 +368,11 @@ export default function Sidebar({
               <button
                 onClick={() => router.push("/video")}
                 className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isDarkMode
-                    ? "bg-cyan-900/40 text-cyan-400 hover:bg-cyan-900/60"
-                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 hover:from-cyan-200 hover:to-blue-200"
+                  isActive("/video")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
+                    ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
+                    : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
                 }`}
                 title="Danh sách video"
               >
@@ -357,7 +381,9 @@ export default function Sidebar({
               <button
                 onClick={() => router.push("/video/myVideo")}
                 className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isDarkMode
+                  isActive("/video/myVideo")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
                 }`}
@@ -366,9 +392,11 @@ export default function Sidebar({
                 <Play className="w-5 h-5" />
               </button>
               <button
-                onClick={() => router.push("/learningProgress")}
+                onClick={() => router.push("/recentlyViewed")}
                 className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isDarkMode
+                  isActive("/recentlyViewed")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
                 }`}
@@ -379,7 +407,9 @@ export default function Sidebar({
               <button
                 onClick={() => router.push("/vocabulary")}
                 className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isDarkMode
+                  isActive("/vocabulary")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
                 }`}
@@ -390,9 +420,11 @@ export default function Sidebar({
               <button
                 onClick={() => router.push("/practice")}
                 className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isDarkMode
-                    ? "bg-cyan-900/40 text-cyan-400 hover:bg-cyan-900/60"
-                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 hover:from-cyan-200 hover:to-blue-200"
+                  isActive("/practice")
+                    ? "bg-white text-cyan-600 shadow-lg"
+                    : isDarkMode
+                    ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
+                    : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
                 }`}
                 title="Luyện đề"
               >
