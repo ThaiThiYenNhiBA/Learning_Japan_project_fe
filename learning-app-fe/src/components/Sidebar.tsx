@@ -133,17 +133,15 @@ export default function Sidebar({
 
   return (
     <div
-      className={`${sidebarOpen ? "w-72" : "w-24"} ${
-        isDarkMode
-          ? "bg-gray-800 border-gray-700"
-          : "bg-white/90 backdrop-blur-sm border-cyan-100"
-      } border-r transition-all duration-300 flex flex-col shadow-lg`}
+      className={`${sidebarOpen ? "w-72" : "w-24"} ${isDarkMode
+        ? "bg-gray-800 border-gray-700"
+        : "bg-white/90 backdrop-blur-sm border-cyan-100"
+        } border-r transition-all duration-300 flex flex-col shadow-lg`}
     >
       {/* Logo Section */}
       <div
-        className={`p-4 ${
-          isDarkMode ? "border-gray-700" : "border-cyan-100"
-        } border-b flex items-center justify-between`}
+        className={`p-4 ${isDarkMode ? "border-gray-700" : "border-cyan-100"
+          } border-b flex items-center justify-between`}
       >
         {sidebarOpen ? (
           <>
@@ -169,11 +167,10 @@ export default function Sidebar({
             </div>
             <button
               onClick={() => setSidebarOpen(false)}
-              className={`p-1.5 rounded-lg transition-colors ${
-                isDarkMode
-                  ? "text-gray-400 hover:bg-gray-700"
-                  : "text-cyan-500 hover:bg-cyan-50"
-              }`}
+              className={`p-1.5 rounded-lg transition-colors ${isDarkMode
+                ? "text-gray-400 hover:bg-gray-700"
+                : "text-cyan-500 hover:bg-cyan-50"
+                }`}
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -192,11 +189,10 @@ export default function Sidebar({
             </div>
             <button
               onClick={() => setSidebarOpen(true)}
-              className={`p-1.5 rounded-lg transition-colors flex-shrink-0 ${
-                isDarkMode
-                  ? "text-gray-400 hover:bg-gray-700"
-                  : "text-cyan-400 hover:bg-cyan-50"
-              }`}
+              className={`p-1.5 rounded-lg transition-colors flex-shrink-0 ${isDarkMode
+                ? "text-gray-400 hover:bg-gray-700"
+                : "text-cyan-400 hover:bg-cyan-50"
+                }`}
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -207,22 +203,19 @@ export default function Sidebar({
       {/* Streak Section */}
       {sidebarOpen ? (
         <div
-          className={`p-4 ${
-            isDarkMode ? "border-gray-700" : "border-cyan-100"
-          } border-b`}
+          className={`p-4 ${isDarkMode ? "border-gray-700" : "border-cyan-100"
+            } border-b`}
         >
           <div
-            className={`${
-              isDarkMode
-                ? "from-yellow-900/30 to-orange-900/30"
-                : "from-cyan-50 via-blue-50 to-indigo-50"
-            } bg-gradient-to-r rounded-xl p-3 shadow-md`}
+            className={`${isDarkMode
+              ? "from-yellow-900/30 to-orange-900/30"
+              : "from-cyan-50 via-blue-50 to-indigo-50"
+              } bg-gradient-to-r rounded-xl p-3 shadow-md`}
           >
             <div className="flex items-center justify-between mb-2">
               <span
-                className={`text-sm font-medium ${
-                  isDarkMode ? "text-gray-300" : "text-cyan-700"
-                }`}
+                className={`text-sm font-medium ${isDarkMode ? "text-gray-300" : "text-cyan-700"
+                  }`}
               >
                 Streak
               </span>
@@ -232,31 +225,28 @@ export default function Sidebar({
               {[...Array(7)].map((_, i) => (
                 <div
                   key={i}
-                  className={`flex-1 h-8 rounded ${
-                    i === currentDayIndex
-                      ? "bg-gradient-to-t from-cyan-400 to-cyan-300 shadow-md"
-                      : isDarkMode
+                  className={`flex-1 h-8 rounded ${i === currentDayIndex
+                    ? "bg-gradient-to-t from-cyan-400 to-cyan-300 shadow-md"
+                    : isDarkMode
                       ? "bg-gray-700"
                       : "bg-gray-200"
-                  } flex items-end justify-center pb-1`}
+                    } flex items-end justify-center pb-1`}
                 >
                   <Star
-                    className={`w-3 h-3 ${
-                      i === currentDayIndex
-                        ? "text-white drop-shadow"
-                        : isDarkMode
+                    className={`w-3 h-3 ${i === currentDayIndex
+                      ? "text-white drop-shadow"
+                      : isDarkMode
                         ? "text-gray-600"
                         : "text-gray-400"
-                    }`}
+                      }`}
                     fill={i === currentDayIndex ? "currentColor" : "none"}
                   />
                 </div>
               ))}
             </div>
             <div
-              className={`flex justify-between mt-2 text-xs ${
-                isDarkMode ? "text-gray-400" : "text-cyan-600"
-              }`}
+              className={`flex justify-between mt-2 text-xs ${isDarkMode ? "text-gray-400" : "text-cyan-600"
+                }`}
             >
               {days.map((day, i) => (
                 <span
@@ -274,26 +264,23 @@ export default function Sidebar({
       ) : (
         // Mini Streak Section - Only show current day with fire
         <div
-          className={`py-4 ${
-            isDarkMode ? "border-gray-700" : "border-cyan-100"
-          } border-b flex flex-col items-center gap-2`}
+          className={`py-4 ${isDarkMode ? "border-gray-700" : "border-cyan-100"
+            } border-b flex flex-col items-center gap-2`}
         >
           {/* Fire icon in circle */}
           <div
-            className={`w-12 h-12 rounded-full flex items-center justify-center ${
-              isDarkMode
-                ? "bg-gradient-to-br from-orange-900/40 to-yellow-900/40"
-                : "bg-gradient-to-br from-orange-100 to-yellow-100"
-            }`}
+            className={`w-12 h-12 rounded-full flex items-center justify-center ${isDarkMode
+              ? "bg-gradient-to-br from-orange-900/40 to-yellow-900/40"
+              : "bg-gradient-to-br from-orange-100 to-yellow-100"
+              }`}
           >
             <span className="text-2xl">🔥</span>
           </div>
 
           {/* Current day label below fire */}
           <span
-            className={`text-sm font-bold ${
-              isDarkMode ? "text-gray-200" : "text-gray-700"
-            }`}
+            className={`text-sm font-bold ${isDarkMode ? "text-gray-200" : "text-gray-700"
+              }`}
           >
             {days[currentDayIndex]}
           </span>
@@ -307,104 +294,96 @@ export default function Sidebar({
             <>
               <button
                 onClick={() => router.push("/video")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/video")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/video")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <Video className="w-5 h-5" />
                 <span>Danh sách video</span>
               </button>
               <button
                 onClick={() => router.push("/video/myVideo")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/video/myVideo")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/video/myVideo")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <Play className="w-5 h-5" />
                 <span>Video của tôi</span>
               </button>
               <button
                 onClick={() => router.push("/myCourses")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/myCourses")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/myCourses")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <GraduationCap className="w-5 h-5" />
                 <span>Khóa học của tôi</span>
               </button>
               <button
                 onClick={() => router.push("/recentlyViewed")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/recentlyViewed")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/recentlyViewed")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <Clock className="w-5 h-5" />
                 <span>Xem gần đây</span>
               </button>
               <button
                 onClick={() => router.push("/vocabulary")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/vocabulary")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/vocabulary")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <BookMarked className="w-5 h-5" />
                 <span>Từ vựng của tôi</span>
               </button>
               <button
                 onClick={() => router.push("/practice")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/practice")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/practice")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <BookOpen className="w-5 h-5" />
                 <span>Luyện đề</span>
               </button>
               <button
                 onClick={() => router.push("/chat")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/chat")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/chat")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Chat Room</span>
               </button>
               <button
                 onClick={() => router.push("/videoCall")}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${
-                  isActive("/videoCall")
-                    ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition transform hover:scale-105 ${isActive("/videoCall")
+                  ? "bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-600 font-medium shadow-sm"
+                  : isDarkMode
                     ? "text-gray-300 hover:bg-gray-700"
                     : "text-gray-600 hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <Radio className="w-5 h-5" />
                 <span>Video Call</span>
@@ -414,120 +393,112 @@ export default function Sidebar({
             <>
               <button
                 onClick={() => router.push("/video")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isActive("/video")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${isActive("/video")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Danh sách video"
               >
                 <Video className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/video/myVideo")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isActive("/video/myVideo")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${isActive("/video/myVideo")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Video của tôi"
               >
                 <Play className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/myCourses")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isActive("/myCourses")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${isActive("/myCourses")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Khóa học của tôi"
               >
                 <GraduationCap className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/recentlyViewed")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isActive("/recentlyViewed")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${isActive("/recentlyViewed")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Xem gần đây"
               >
                 <Clock className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/vocabulary")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${
-                  isActive("/vocabulary")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all ${isActive("/vocabulary")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400 shadow-sm"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600 shadow-sm"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Từ vựng của tôi"
               >
                 <BookMarked className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/practice")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isActive("/practice")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${isActive("/practice")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Luyện đề"
               >
                 <BookOpen className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/chat")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isActive("/chat")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${isActive("/chat")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Chat Room"
               >
                 <MessageCircle className="w-5 h-5" />
               </button>
               <button
                 onClick={() => router.push("/videoCall")}
-                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${
-                  isActive("/videoCall")
-                    ? isDarkMode
-                      ? "bg-cyan-900/40 text-cyan-400"
-                      : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
-                    : isDarkMode
+                className={`w-full flex items-center justify-center p-3.5 rounded-xl transition-all shadow-sm ${isActive("/videoCall")
+                  ? isDarkMode
+                    ? "bg-cyan-900/40 text-cyan-400"
+                    : "bg-gradient-to-br from-cyan-100 to-blue-100 text-cyan-600"
+                  : isDarkMode
                     ? "text-gray-400 hover:bg-gray-700 hover:text-gray-300"
                     : "text-gray-600 hover:bg-cyan-50 hover:text-cyan-600"
-                }`}
+                  }`}
                 title="Video Call"
               >
                 <Radio className="w-5 h-5" />
